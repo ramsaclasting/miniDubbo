@@ -22,7 +22,7 @@ public class main
             //Syst
 
             System.out.println("nmsl");
-            IRegistry registry = new EtcdRegistry("http://127.0.0.1:2379");//new EtcdRegistry("http://106.55.191.226:2379");
+            IRegistry registry = new EtcdRegistry("http://localhost:2379");//new EtcdRegistry("http://106.55.191.226:2379");
 /*            try
             {
                 registry = new EtcdRegistry(address);
@@ -33,7 +33,7 @@ public class main
             }*/
 
             RPCServer server = new RPCServer(registry)
-                    .Port(2017)
+                    .Port(2022)
                     .ExposeService(IMyTestService.class, new MyTestService1());
             server.Run();
 

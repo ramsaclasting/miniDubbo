@@ -26,8 +26,9 @@ public class EtcdRegistry implements IRegistry
 {
     //默认地址
     private String registryAddress =  "http://127.0.0.1:2379";
-    private final String rootPath = "minidubbo";
+    private final String rootPath = "miniDubbo";
     private Lease lease;
+    private long ttl = 60; //默认lease生存周期time to live
     private KV kv;
     private Watch watch;
     private long leaseID;
@@ -35,15 +36,36 @@ public class EtcdRegistry implements IRegistry
     private Map<String , List<EndPoint>> endointsByService = new LinkedHashMap<>();
     private ICallBackEvent callBackEvent;
 
+    public EtcdRegistry() throws Exception
+    {
+        this.registryAddress = registryAddress;
+        Client client = Client.builder().endpoints(registryAddress).build();
+
+        //获取租约client
+        this.lease = client.getLeaseClient();
+        //获取键值对client
+        this.kv = client.getKVClient();
+        //监听
+        this.watch = client.getWatchClient();
+
+        //创建一个租约，存在60s，从创建后开始倒计时
+        this.leaseID = lease.grant(ttl).get().getID();
+    }
+
     public EtcdRegistry(String registryAddress) throws Exception
     {
         this.registryAddress = registryAddress;
         Client client = Client.builder().endpoints(registryAddress).build();
 
+        //获取租约client
         this.lease = client.getLeaseClient();
+        //获取键值对client
         this.kv = client.getKVClient();
+        //监听
         this.watch = client.getWatchClient();
-        this.leaseID = lease.grant(30).get().getID();
+
+        //创建一个租约，存在60s，从创建后开始倒计时
+        this.leaseID = lease.grant(ttl).get().getID();
     }
 
     // 向ETCD中注册服务
@@ -182,7 +204,7 @@ public class EtcdRegistry implements IRegistry
                     {
                         Lease.KeepAliveListener listener = lease.keepAlive(leaseID);
                         listener.listen();
-                        System.out.println("Keep Alive lease: " + leaseID + ";" +
+                        System.out.println("Keep Alive lease: " + leaseID + ";\n" +
                                 "HexFormat: "+ Long.toHexString(leaseID));
                     }
                     catch (Exception e)

@@ -15,7 +15,7 @@ import java.util.concurrent.Executors;
 public class RPCServer
 {
     private String host = "127.0.0.1";
-    private int port = 2017;
+    private int port = 2022;
     private IRegistry registry;
 
     private Map<String, Object> handlerMap = new LinkedHashMap<>();

@@ -130,15 +130,15 @@ public class ConnectManager implements IConnectManager, ICallBackEvent
         //如果注册的服务被删除
         if(event.getEventType() == RegistryEvent.EventType.DELETE)
         {
-            // 服务序列串:   /minidubbo/bytebuddy.IMyTestService/192.168.41.215:2017
+            // 服务序列串:   /minidubbo/bytebuddy.IMyTestService/192.168.41.215:2022
 
             String _str = event.getTuple().getKey();
             String[] _temp = _str.split("/");
             String serviceName = _temp[2];    // bytebuddy.IMyTestService
-            String endPoint_str = _temp[3];   // 192.168.41.215:2017
+            String endPoint_str = _temp[3];   // 192.168.41.215:2022
 
             String host = endPoint_str.split(":")[0];   //192.168.41.215:
-            int port = Integer.valueOf(endPoint_str.split(":")[1]);    //2017
+            int port = Integer.valueOf(endPoint_str.split(":")[1]);    //2022
 
             Iterator<ChannelWrapper> _iterator = channelsByService.get(serviceName).iterator();
             while (_iterator.hasNext())
@@ -160,10 +160,10 @@ public class ConnectManager implements IConnectManager, ICallBackEvent
             String _str = event.getTuple().getKey();
             String[] _temp = _str.split("/");
             String serviceName = _temp[2];    // bytebuddy.IMyTestService
-            String endPoint_str = _temp[3];   // 192.168.41.215:2017
+            String endPoint_str = _temp[3];   // 192.168.41.215:2022
 
             String host = endPoint_str.split(":")[0];   //192.168.41.215:
-            int port = Integer.valueOf(endPoint_str.split(":")[1]);    //2017
+            int port = Integer.valueOf(endPoint_str.split(":")[1]);    //2022
 
             try
             {
