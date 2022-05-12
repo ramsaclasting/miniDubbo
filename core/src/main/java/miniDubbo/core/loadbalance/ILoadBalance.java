@@ -1,7 +1,8 @@
 package miniDubbo.core.loadbalance;
 
-import com.leibangzhu.coco.Adaptive;
-import com.leibangzhu.coco.Extension;
+
+import miniDubbo.coco.Adaptive;
+import miniDubbo.coco.Extension;
 
 import java.util.Map;
 

@@ -11,8 +11,8 @@ import com.coreos.jetcd.options.GetOption;
 import com.coreos.jetcd.options.PutOption;
 import com.coreos.jetcd.options.WatchOption;
 import com.coreos.jetcd.watch.WatchEvent;
-import core.EndPoint;
-import core.IPHelper;
+import miniDubbo.core.EndPoint;
+import miniDubbo.core.IPHelper;
 
 import java.text.MessageFormat;
 import java.util.ArrayList;

@@ -1,0 +1,2 @@
+random=miniDubbo.core.loadbalance.RandomLoadBalance
+first= miniDubbo.core.loadbalance.SelectFirstLoadBalance
